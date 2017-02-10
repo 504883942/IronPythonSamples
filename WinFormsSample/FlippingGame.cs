@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
+using System.Linq;
 
 namespace WinFormsSample {
     public partial class FlippingGame : Form {
@@ -23,7 +24,13 @@ namespace WinFormsSample {
             this.scope.ImportModule("FlippingGame");
             this.engine.Execute("game = FlippingGame.FlippingGame()", this.scope);
             this.game = this.scope.GetVariable("game");
+            string begin = game.beginDate;
+            string end = game.endDate;
+            int[] a = { 1, 2, 3, 4, 6, 7, 5, 4, 5 ,10000};
+            int av=  a.Sum() / a.Length;
+            //this.scope.SetVariable("game.data", a);
 
+            var b= game.average(a);
             ConstrainWager();
             ShowBankroll();
 
